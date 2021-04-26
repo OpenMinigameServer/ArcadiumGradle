@@ -194,14 +194,21 @@ open class NickArcadePlugin : Plugin<Project> {
         }
     }
 
+    val repos = arrayOf(
+        "https://kotlin.bintray.com/kotlinx/",
+        "https://repo.incendo.org/content/repositories/snapshots",
+        "https://repo.rapture.pw/repository/maven-snapshots/",
+        "https://repo.spongepowered.org/maven",
+        "https://repo.glaremasters.me/repository/concuncan/"
+    )
+
     private fun addDefaultRepositories(project: Project) {
         with(project.repositories) {
             mavenLocal()
-            this.maven {
-                it.setUrl("https://kotlin.bintray.com/kotlinx/")
-            }
-            this.maven {
-                it.setUrl("https://oss.sonatype.org/content/repositories/snapshots/")
+            repos.forEach { repo ->
+                this.maven {
+                    it.setUrl(repo)
+                }
             }
         }
     }
