@@ -19,6 +19,7 @@ dependencies {
     implementation("kr.entree:spigradle:2.2.3")
     implementation("com.github.jengelman.gradle.plugins:shadow:6.1.0")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21")
+    implementation("gradle.plugin.org.zeroturnaround:gradle-jrebel-plugin:1.1.10")
 }
 
 gradlePlugin {

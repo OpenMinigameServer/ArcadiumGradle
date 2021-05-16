@@ -26,6 +26,7 @@ open class NickArcadePlugin : Plugin<Project> {
         project.pluginManager.apply(MavenPublishPlugin::class.java)
         project.pluginManager.apply(ShadowPlugin::class.java)
         project.pluginManager.apply(SpigotPlugin::class.java)
+        project.pluginManager.apply("org.zeroturnaround.gradle.jrebel")
 
         val extension = project.extensions.create("nickarcade", NickArcadePluginExtension::class.java)
 
