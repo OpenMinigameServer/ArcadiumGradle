@@ -28,4 +28,5 @@ object ArcadiumDependencies {
 
     val NICKARCADE_CORE = Dependency(omsGroup, "NickArcadeBukkit", "1.0-SNAPSHOT")
     val NICKARCADE_PLUGIN = Dependency(omsGroup, "", "1.0-SNAPSHOT")
+    val FLOODGATE_PLUGIN = Dependency("org.geysermc.floodgate", "api", "2.0-SNAPSHOT")
 }

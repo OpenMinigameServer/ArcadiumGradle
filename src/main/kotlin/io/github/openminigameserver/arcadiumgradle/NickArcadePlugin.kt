@@ -3,6 +3,7 @@ package io.github.openminigameserver.arcadiumgradle
 import com.github.jengelman.gradle.plugins.shadow.ShadowExtension
 import com.github.jengelman.gradle.plugins.shadow.ShadowPlugin
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import io.github.openminigameserver.arcadiumgradle.ArcadiumDependencies.FLOODGATE_PLUGIN
 import kr.entree.spigradle.module.spigot.SpigotExtension
 import kr.entree.spigradle.module.spigot.SpigotPlugin
 import org.gradle.api.Plugin
@@ -10,6 +11,7 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.JavaPlugin
+import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
@@ -91,8 +93,10 @@ open class NickArcadePlugin : Plugin<Project> {
 
     private fun applyDefaultDependencies(extension: NickArcadePluginExtension, project: Project) {
         applyArcadiumDependency(extension, project)
-        if (extension.isCoreProject)
+        if (extension.isCoreProject) {
+            applyExtraPluginDependency(project)
             applyKotlinDependency(project)
+        }
         if (!extension.isCoreProject) {
             applyCoreDependency(project)
         }
@@ -101,6 +105,10 @@ open class NickArcadePlugin : Plugin<Project> {
         extension.depends.forEach {
             applyArcadePluginDependency(project, it)
         }
+    }
+
+    private fun applyExtraPluginDependency(project: Project) {
+        project.dependencies.addDependency(FLOODGATE_PLUGIN)
     }
 
     private fun removeKotlinStdlib(project: Project) {
@@ -178,9 +186,16 @@ open class NickArcadePlugin : Plugin<Project> {
             //Automatically add the depends to the spigot config
             depends = depends + extension.depends.map { nickArcadePlugin(it) }
 
+            if (extension.isCoreProject) {
+                addPluginExternalDepends()
+            }
             debug.eula = true
             version = project.version.toString()
         }
+    }
+
+    private fun SpigotExtension.addPluginExternalDepends() {
+        depends = depends + "floodgate"
     }
 
     private fun setupKotlinDefaults(project: Project) {
@@ -199,7 +214,8 @@ open class NickArcadePlugin : Plugin<Project> {
         "https://repo.incendo.org/content/repositories/snapshots",
         "https://repo.rapture.pw/repository/maven-snapshots/",
         "https://repo.spongepowered.org/maven",
-        "https://repo.glaremasters.me/repository/concuncan/"
+        "https://repo.glaremasters.me/repository/concuncan/",
+        "https://repo.opencollab.dev/maven-snapshots/"
     )
 
     private fun addDefaultRepositories(project: Project) {
