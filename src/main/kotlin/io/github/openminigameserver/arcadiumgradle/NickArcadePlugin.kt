@@ -200,6 +200,7 @@ open class NickArcadePlugin : Plugin<Project> {
 
     private fun setupKotlinDefaults(project: Project) {
         with(project) {
+            extensions.getByType(JavaPluginExtension::class.java).withSourcesJar()
             val compileKotlin = tasks.getByName("compileKotlin") as KotlinCompile
             compileKotlin.kotlinOptions {
                 jvmTarget = "11"
