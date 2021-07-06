@@ -112,12 +112,6 @@ open class NickArcadePlugin : Plugin<Project> {
         project.dependencies.addDependency(FLOODGATE_PLUGIN)
     }
 
-    private fun removeKotlinStdlib(project: Project) {
-        with(project.tasks.getByName("compileKotlin") as KotlinCompile) {
-            kotlinOptions.noStdlib = true
-        }
-    }
-
     private fun configureSpigot(extension: NickArcadePluginExtension, project: Project) {
         val spigot = project.extensions.getByType(SpigotExtension::class.java)
         if (!extension.isCoreProject) {

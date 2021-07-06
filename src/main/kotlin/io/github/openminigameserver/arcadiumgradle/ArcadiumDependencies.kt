@@ -15,16 +15,16 @@ object ArcadiumDependencies {
     val KOTLIN_STDLIB = KOTLIN_MODULE_BASE.copy(name = "kotlin-stdlib")
     val KOTLIN_REFLECT = KOTLIN_MODULE_BASE.copy(name = "kotlin-reflect")
 
-    val KOTLINX_DATETIME = Dependency("org.jetbrains.kotlinx", "kotlinx-datetime", "0.1.1")
-    val KOTLINX_COROUTINES = Dependency("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8", "1.4.2")
+    val KOTLINX_DATETIME = Dependency("org.jetbrains.kotlinx", "kotlinx-datetime", "0.2.1")
+    val KOTLINX_COROUTINES = Dependency("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8", "1.5.0")
 
     val ARCADIUM_API = Dependency(
-        "io.github.openminigameserver.arcadium",
-        "arcadium-api",
-        "1.16.5-R0.1-SNAPSHOT"
+        "io.github.nickacpt.deepslate",
+        "deepslate-api",
+        "1.17-R0.1-SNAPSHOT"
     )
 
-    val ARCADIUM_ALL = ARCADIUM_API.copy(name = "arcadium")
+    val ARCADIUM_ALL = ARCADIUM_API.copy(name = "deepslate")
 
     val NICKARCADE_CORE = Dependency(omsGroup, "NickArcadeBukkit", "1.0-SNAPSHOT")
     val NICKARCADE_PLUGIN = Dependency(omsGroup, "", "1.0-SNAPSHOT")

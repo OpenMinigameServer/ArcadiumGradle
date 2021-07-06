@@ -1,8 +1,8 @@
 plugins {
-    kotlin("jvm") version "1.4.21"
+    kotlin("jvm") version "1.5.0"
     `java-gradle-plugin`
     `maven-publish`
-    id("com.gradle.plugin-publish") version "0.12.0"
+    id("com.gradle.plugin-publish") version "0.15.0"
 
 }
 
@@ -16,9 +16,9 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("kr.entree:spigradle:2.2.3")
-    implementation("com.github.jengelman.gradle.plugins:shadow:6.1.0")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21")
+    implementation("kr.entree:spigradle:2.2.4")
+    implementation("gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0")
     implementation("gradle.plugin.org.zeroturnaround:gradle-jrebel-plugin:1.1.10")
 }
 
