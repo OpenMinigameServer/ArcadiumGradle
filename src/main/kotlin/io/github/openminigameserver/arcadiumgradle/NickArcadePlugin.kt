@@ -1,5 +1,6 @@
 package io.github.openminigameserver.arcadiumgradle
 
+import com.github.jengelman.gradle.plugins.shadow.ShadowBasePlugin
 import com.github.jengelman.gradle.plugins.shadow.ShadowExtension
 import com.github.jengelman.gradle.plugins.shadow.ShadowPlugin
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
@@ -15,6 +16,7 @@ import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
+import org.gradle.internal.impldep.org.bouncycastle.asn1.x500.style.RFC4519Style.name
 import org.gradle.jvm.tasks.Jar
 import org.gradle.plugins.ide.eclipse.internal.AfterEvaluateHelper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -173,7 +175,7 @@ open class NickArcadePlugin : Plugin<Project> {
         with(spigotExtension) {
             name = nickArcadePlugin(extension.name)
             authors("NickAc")
-            apiVersion = "1.16"
+            apiVersion = "1.17"
             if (!extension.isCoreProject) {
                 depends = depends + nickArcadePlugin(coreProjectName)
             }
@@ -226,6 +228,9 @@ open class NickArcadePlugin : Plugin<Project> {
     }
 
     private fun addShadowJarIntoBuild(extension: NickArcadePluginExtension, project: Project) {
+        project.configurations.getByName("api")
+            .extendsFrom(project.configurations.getByName(ShadowBasePlugin.getCONFIGURATION_NAME()))
+
         project.tasks.getByName("assemble").dependsOn("shadowJar")
         if (!extension.publishShaded) {
             project.tasks.getByName("jar").dependsOn("shadowJar")
